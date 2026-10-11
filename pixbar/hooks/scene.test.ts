@@ -206,4 +206,3 @@ describe('land', () => {
     expect(s.bubbles.length).toBe(0)
   })
 })
-
