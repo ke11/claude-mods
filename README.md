@@ -26,6 +26,17 @@ A pixel creature in a small world, above your prompt. It shows what Claude is do
 and how much room you have left, so you can tell at a glance without reading the
 transcript.
 
+**Whale**, in the sea (the default):
+
+![The whale spouting in its sea above seagrass and litter, beside the folder, branch, model, context and rate-limit meters](docs/whale.png)
+
+**Clawd**, on land (`/pixbar theme clawd`):
+
+![Clawd skating on its board under the moon, beside the same meters](docs/clawd.png)
+
+Both show the same moment: Claude answering, 42% of the context used, 58% of the
+five-hour window, and uncommitted work (the litter on the floor).
+
 ### What it shows
 
 | Signal | Whale, in the sea | Clawd, on land |
