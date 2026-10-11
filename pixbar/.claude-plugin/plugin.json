@@ -1,0 +1,31 @@
+{
+  "name": "pixbar",
+  "version": "0.5.0",
+  "description": "A pixel creature above the prompt or in its own pane: the whale in a sea or clawd skating on land. Uncommitted work leaves plants and litter on the floor. Context colours it, the five-hour window sets its height or the time of day. /pixbar theme <name> picks one.",
+  "author": {
+    "name": "Kell Kwok"
+  },
+  "homepage": "https://pixbar.dev",
+  "repository": "https://github.com/ke11/claude-mods",
+  "license": "MIT",
+  "keywords": [
+    "statusline",
+    "pixel-art",
+    "animation",
+    "context-window",
+    "rate-limits",
+    "git"
+  ],
+  "userConfig": {
+    "placement": {
+      "type": "string",
+      "title": "Where the creature lives",
+      "description": "band: above the prompt. pane: a pane of its own, docked beside the transcript in fullscreen. /pixbar layout band or /pixbar layout pane switches for the session.",
+      "options": [
+        "band",
+        "pane"
+      ],
+      "default": "band"
+    }
+  }
+}

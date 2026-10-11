@@ -1,0 +1,15 @@
+{
+  "name": "claude-mods",
+  "description": "Claude Code mods by Kell Kwok. PixBar: a pixel creature above your prompt.",
+  "owner": {
+    "name": "Kell Kwok"
+  },
+  "plugins": [
+    {
+      "name": "pixbar",
+      "source": "./pixbar",
+      "description": "A pixel creature above your Claude Code prompt: the whale or clawd, wired to your turn, context, five-hour window and git.",
+      "homepage": "https://pixbar.dev"
+    }
+  ]
+}

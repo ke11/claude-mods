@@ -1,0 +1,37 @@
+name: Bug report
+description: Something in a mod doesn't work or looks wrong.
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you saw, and what you expected. A screenshot helps.
+    validations:
+      required: true
+  - type: input
+    id: mod
+    attributes:
+      label: Mod and version
+      description: From `/plugin`, for example `pixbar 0.5.0`.
+    validations:
+      required: true
+  - type: input
+    id: claude
+    attributes:
+      label: Claude Code version
+      description: From `claude --version`.
+    validations:
+      required: true
+  - type: input
+    id: terminal
+    attributes:
+      label: Terminal and OS
+      description: For example Ghostty on macOS 26.
+  - type: dropdown
+    id: plan
+    attributes:
+      label: Plan
+      options:
+        - Claude subscription
+        - API key
