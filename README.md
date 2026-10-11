@@ -119,7 +119,9 @@ A file that doesn't parse is ignored, and the whale is drawn instead.
 ### Privacy
 
 PixBar reads what Claude Code passes it and your local `git status` (every five
-seconds). It writes one file, `~/.claude/pixbar/active`, and makes no network calls.
+seconds). It writes two one-line files, `~/.claude/pixbar/active` and
+`~/.claude/pixbar/configured`, and makes no network calls. The full list of what it
+reads, writes and runs is in [pixbar/README.md](pixbar/README.md).
 
 ## Troubleshooting
 
