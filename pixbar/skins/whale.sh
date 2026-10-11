@@ -1,5 +1,5 @@
-# whale — pixbar's default creature. 15 x 10, four beat frames + idle, traced off the
-# whaleagent.io mark: a 128x128 GIF (4 frames at 5fps, one pixel every 6px — the module
+# whale — pixbar's default creature. 15 x 10, four beat frames + idle, traced off
+# a 128x128 GIF (4 frames at 5fps, one pixel every 6px — the module
 # size is the gcd of every ink run, measured rather than guessed).
 #
 # The whale is also built into the mod (WHALE in hooks/scene.ts), so it still swims

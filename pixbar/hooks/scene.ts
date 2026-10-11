@@ -18,9 +18,9 @@ export type Skin = {
   ride?: 'skateboard' // land: rides a skateboard while it answers (clawd); unset walks
 }
 
-// The whaleagent skin, exactly as pixerbar's skins/whaleagent.sh ships it.
+// The whale, exactly as skins/whale.sh ships it (scripts/check-whale.ts keeps them equal).
 export const WHALE: Skin = {
-  name: 'whaleagent',
+  name: 'whale',
   w: 15,
   nframes: 4,
   idle: 4,

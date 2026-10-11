@@ -87,9 +87,9 @@ test('cells encode as base64 of u32 triplets', async () => {
   expect(encodeCells(cells).length).toBe(Math.ceil((cells.length * 4) / 3) * 4)
 })
 
-test('the shipped whaleagent skin parses to the built-in whale', async () => {
+test('the shipped whale skin parses to the built-in whale', async () => {
   const src = [
-    'SKIN_NAME="whaleagent"', 'NFRAMES=4', 'W=15', "SKIN_BASE='247;147;26'", "SKIN_GAUGE='216;105;94'",
+    'SKIN_NAME="whale"', 'NFRAMES=4', 'W=15', "SKIN_BASE='247;147;26'", "SKIN_GAUGE='216;105;94'",
     "SKIN_CREAM='250;249;245'", 'IDLE_FRAME=4', 'FAST_A=1; FAST_B=0',
     'DIRTY=(', WHALE.dirty.map(r => `"${r}"`).join(' '), ')',
     'FRAMES=(', '  # 0 - tail down', WHALE.frames.map(r => `"${r}"`).join(' '), ')',
