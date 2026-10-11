@@ -1,5 +1,6 @@
 // The whale's sea, drawn as pure data: a pixel grid in, Raster cells out.
-// No `$` in here, so the tests can run every state without an engine.
+// No `$` and no imports in here, so the tests can run every state without an engine, and
+// pixbar.dev can import this file as it is to draw its preview.
 
 export type Mode = 'idle' | 'thinking' | 'tool-use' | 'responding'
 
@@ -341,7 +342,6 @@ const JUMP_MS = 1400 // answering, it jumps once a beat: up three pixels and dow
 // The same signals, read for something that walks. Context is still its colour and git
 // still litters the floor; the turn is still how it moves. The five-hour window can't be a
 // depth on land, so it is the time of night: the moon rises on a fresh window and sets at 100%.
-// Kept in step with pixbar's packages/core/src/sea.ts, which the site previews with.
 export function paintLand(skin: Skin, s: SceneState): Int32Array {
   const w = widthOf(skin, s), h = SEA_H
   const px = new Int32Array(w * h).fill(AIR)

@@ -4,6 +4,10 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
+### 0.5.2 (2026-10-11)
+
+- A hint after `/pixbar` as you type it: every theme you can pick, then the layouts.
+
 ### 0.5.1 (2026-10-11)
 
 - `skins/whale.sh`: the whale as a skin file next to clawd, and the simplest example of the format. The built-in whale is still the fallback, and a check keeps the two identical.
