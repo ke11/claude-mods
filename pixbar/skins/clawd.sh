@@ -1,4 +1,4 @@
-# clawd — pixbar's default skin. 21 x 10, four working poses + idle.
+# clawd — pixbar's land creature. 21 x 10, four working poses + idle.
 #
 # The creature itself is 16 wide, traced by measurement rather than by eye:
 # module 26.375px, every silhouette edge on an integer multiple, symmetric about
