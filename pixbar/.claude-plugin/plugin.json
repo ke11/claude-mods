@@ -8,9 +8,10 @@
   },
   "homepage": "https://pixbar.dev",
   "repository": "https://github.com/ke11/claude-mods",
-  "documentationUrl": "https://github.com/ke11/claude-mods#readme",
-  "supportUrl": "https://github.com/ke11/claude-mods/issues",
-  "privacyPolicyUrl": "https://github.com/ke11/claude-mods#privacy",
+  "documentationUrl": "https://pixbar.dev/docs",
+  "supportUrl": "https://pixbar.dev/support",
+  "privacyPolicyUrl": "https://pixbar.dev/privacy",
+  "termsOfServiceUrl": "https://pixbar.dev/terms",
   "license": "MIT",
   "keywords": [
     "statusline",
