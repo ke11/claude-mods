@@ -4,7 +4,7 @@
 import { readFileSync } from 'node:fs'
 import { WHALE, parseSkin } from '../pixbar/hooks/scene'
 
-const parsed = parseSkin(readFileSync(new URL('../pixbar/skins/whale.sh', import.meta.url), 'utf8'))
+const parsed = parseSkin(readFileSync(new URL('../skins/whale.sh', import.meta.url), 'utf8'))
 const problems: string[] = []
 if (!parsed) problems.push('skins/whale.sh does not parse')
 else {

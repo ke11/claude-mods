@@ -15,7 +15,7 @@ claude plugin test pixbar
 
 `claude --plugin-dir ./pixbar` loads a mod for one session without installing it.
 
-A new creature is a skin file in `pixbar/skins/`; the README's "Make your own creature"
+A new creature is a skin file in `skins/` (run `bun scripts/build-skins.ts` after adding or changing one; it writes the copy the mod ships, `pixbar/hooks/skins.ts`); the README's "Make your own creature"
 lists the fields, and `whale.sh` is the simplest example. The whale is also built into
 `pixbar/hooks/scene.ts`: change both together, and `bun scripts/check-whale.ts` checks
 they still match (CI runs it). pixbar.dev draws its preview with `scene.ts` itself, so

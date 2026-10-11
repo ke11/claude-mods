@@ -88,8 +88,8 @@ Each creature is a skin file:
 
 | Where | What |
 | --- | --- |
-| [`pixbar/skins/whale.sh`](pixbar/skins/whale.sh) | The whale. It is also built into the mod, so it still swims if no skin file can be read. |
-| [`pixbar/skins/clawd.sh`](pixbar/skins/clawd.sh) | Clawd, with `HABITAT='land'` and a skateboard. |
+| [`skins/whale.sh`](skins/whale.sh) | The whale. It is also built into the mod, so it still swims if no skin file can be read. |
+| [`skins/clawd.sh`](skins/clawd.sh) | Clawd, with `HABITAT='land'` and a skateboard. |
 | `~/.claude/pixbar/skins/<name>.sh` | Your own. They show up in `/pixbar` next to the shipped ones. |
 
 Your pick is kept for the next session. `/pixbar theme whale` goes back to the whale.
@@ -139,6 +139,7 @@ Working on a mod from a clone: see [CONTRIBUTING.md](CONTRIBUTING.md).
 claude plugin validate pixbar
 claude plugin test pixbar
 bun scripts/check-whale.ts   # skins/whale.sh still matches the built-in whale
+bun scripts/build-skins.ts   # after changing a file in skins/: writes pixbar/hooks/skins.ts
 ```
 
 ## Changes and issues

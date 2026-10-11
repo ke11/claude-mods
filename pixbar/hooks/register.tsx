@@ -5,6 +5,7 @@ import {
   paintScene, parseSkin, resetAt, seaWidth, stepBubbles, stepSwim, toCells, until, useColor, widthOf, windowLabel,
 } from './scene'
 import type { Mode, SceneState, Skin } from './scene'
+import { SHIPPED } from './skins'
 
 // PixBar: a pixel creature in the band above the prompt, or in a pane of its own.
 //   context used      → its colour, filling from the belly up
@@ -13,7 +14,7 @@ import type { Mode, SceneState, Skin } from './scene'
 //   turn state        → how it moves: parked when idle, slow in thought,
 //                       fast at work, a spout or a speech bubble while responding
 //
-// Creatures: the whale (built in), the ones this mod ships in skins/, and any the
+// Creatures: the whale (built in), the ones this mod ships (skins.ts), and any the
 // person has under ~/.claude/pixbar/skins/. `/pixbar <name>` switches and remembers.
 
 const TICK = 100 // ms per frame: 10 fps
@@ -84,7 +85,6 @@ export const register: Register = (on, options) => {
 
   // Set up in session.start, where `$` is known: where creatures live, and how to find one.
   let home = ''
-  let root = ''
   const userDirs = () => [`${home}/.claude/pixbar`, `${home}/.claude/pixerbar`] // pixerbar: before the rename
   const loadSkin = async (read: (path: string) => Promise<string>, name: string): Promise<Skin | undefined> => {
     if (WHALE_NAMES.includes(name)) return WHALE
@@ -96,20 +96,18 @@ export const register: Register = (on, options) => {
         return undefined // not in this folder
       }
     }
+    // the shipped skins are text inside the mod (skins.ts): it reads none of its own files
+    const shipped = SHIPPED[name] ? parseSkin(SHIPPED[name]) : undefined
     // your own skins first, then the shipped ones, then pixerbar-era copies: an old
     // export must never stand in for a shipped creature (a 1 Sep clawd gave it a purple eye)
-    for (const dir of [`${home}/.claude/pixbar/skins`, `${root}/skins`, `${home}/.claude/pixerbar/skins`]) {
-      const parsed = await parseAt(dir)
-      if (!parsed) continue
-      // a pixerbar-era copy has no HABITAT: clawd would swim. The shipped skin knows.
-      if (!parsed.habitat) {
-        const shipped = await parseAt(`${root}/skins`)
-        parsed.habitat = shipped?.habitat
-        parsed.ride ??= shipped?.ride
-      }
-      return parsed
+    const parsed = (await parseAt(`${home}/.claude/pixbar/skins`)) ?? shipped ?? (await parseAt(`${home}/.claude/pixerbar/skins`))
+    if (!parsed) return undefined
+    // a pixerbar-era copy has no HABITAT: clawd would swim. The shipped skin knows.
+    if (!parsed.habitat) {
+      parsed.habitat = shipped?.habitat
+      parsed.ride ??= shipped?.ride
     }
-    return undefined
+    return parsed
   }
   const useSkin = (next: Skin) => {
     skin = next
@@ -123,7 +121,6 @@ export const register: Register = (on, options) => {
 
   on('session.start', async ($, e, next) => {
     home = (await $.env.get('HOME')) ?? ''
-    root = $.plugin.root
     const read = (path: string) => $.fs.read(path)
 
     // The creature last chosen, with /pixbar theme or with theme in /plugin configure,
@@ -285,8 +282,8 @@ export const register: Register = (on, options) => {
 
   // Every creature this person can pick: the whale, the ones shipped here, their own.
   const creatures = async (list: (path: string) => Promise<{ name: string }[]>) => {
-    const names = new Set(['whale'])
-    for (const dir of [`${root}/skins`, ...userDirs().map(d => `${d}/skins`)]) {
+    const names = new Set(['whale', ...Object.keys(SHIPPED)])
+    for (const dir of userDirs().map(d => `${d}/skins`)) {
       const entries = await list(dir).catch(() => [])
       for (const f of entries) if (f.name.endsWith('.sh')) names.add(f.name.slice(0, -3))
     }
