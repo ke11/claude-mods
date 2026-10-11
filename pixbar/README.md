@@ -18,9 +18,9 @@ PixBar makes no network calls and sends nothing anywhere.
   your prompts, the replies or tool results.
 - The `HOME` environment variable, to find `~/.claude/pixbar`. No other variable, and no
   credential.
-- Skin files: `skins/*.sh` shipped in this folder, and your own in
-  `~/.claude/pixbar/skins/`. They are read as text for their pixel rows and colours.
-  They are never run.
+- Your own skin files in `~/.claude/pixbar/skins/`. They are read as text for their pixel
+  rows and colours, and never run. The shipped creatures are text inside the mod
+  (`hooks/skins.ts`): it reads no file of its own.
 
 **Writes** no file. Your theme and the theme setting last seen in `/plugin configure`
 are kept in the mod's own store, which Claude Code holds for it. Versions before 0.5.4

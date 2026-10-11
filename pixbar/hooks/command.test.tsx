@@ -10,7 +10,11 @@ test('bare /pixbar prints the menu with theme and layout', async $ => {
   expect(out.text).toContain('/pixbar layout pane')
 })
 
-// the test sandbox has no skin files, so the built-in whale is the theme to pick
+test('/pixbar theme clawd picks a shipped creature with no skin file to read', async $ => {
+  expect((await run($, 'theme clawd')).text).toContain('Theme: clawd')
+  expect((await run($, '')).text).toContain('● clawd')
+})
+
 test('/pixbar theme whale picks the whale and keeps it', async $ => {
   const out = await run($, 'theme whale')
   expect(out.text).toContain('Theme: whale')

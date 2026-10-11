@@ -4,6 +4,10 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
+### 0.5.5 (2026-10-12)
+
+- The shipped creatures are part of the mod's code, so it reads no file of its own while it runs. The skin files moved to `skins/` at the top of the repository; your own skins in `~/.claude/pixbar/skins/` work as before.
+
 ### 0.5.4 (2026-10-12)
 
 - PixBar no longer writes any file. Your theme is kept in the mod's own store; `~/.claude/pixbar/active` from an earlier version is still read, so your creature stays.
