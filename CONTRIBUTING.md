@@ -18,5 +18,6 @@ claude plugin test pixbar
 A new creature is a skin file in `pixbar/skins/`; the README's "Make your own creature"
 lists the fields, and `whale.sh` is the simplest example. The whale is also built into
 `pixbar/hooks/scene.ts`: change both together, and `bun scripts/check-whale.ts` checks
-they still match (CI runs it). Pull requests go against `master`; keep
+they still match (CI runs it). pixbar.dev draws its preview with `scene.ts` itself, so
+keep that file free of `$` and of imports. Pull requests go against `master`; keep
 `claude plugin test` passing.

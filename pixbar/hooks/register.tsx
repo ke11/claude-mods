@@ -127,7 +127,13 @@ export const register: Register = (on, options) => {
     }
     scene.level = levelFor(skin, fivePct)
 
-    await $.command.register({ name: 'pixbar', description: 'Pick a theme or a layout: /pixbar theme whale|clawd, /pixbar layout band|pane' })
+    // the hint shows dim after /pixbar as it is typed: every theme that can be picked, then the layouts
+    const themes = await creatures(path => $.fs.list(path))
+    await $.command.register({
+      name: 'pixbar',
+      description: 'Pick the creature and where it lives',
+      argumentHint: `theme ${themes.join('|')} · layout ${LAYOUTS.join('|')}`,
+    })
     if (placement === 'pane') void $.ui.open({ id: PANE, title: nameOf(skin) })
 
     // Re-checks the text beside the whale; redraws only when a visible value changed.
