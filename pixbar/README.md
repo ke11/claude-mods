@@ -22,13 +22,10 @@ PixBar makes no network calls and sends nothing anywhere.
   `~/.claude/pixbar/skins/`. They are read as text for their pixel rows and colours.
   They are never run.
 
-**Writes**, both in `~/.claude/pixbar/`, each one line holding a theme name:
-
-- `active`: the theme you picked.
-- `configured`: the theme setting last seen in `/plugin configure`, so a change there is
-  noticed.
-
-Nothing else reads these two files.
+**Writes** no file. Your theme and the theme setting last seen in `/plugin configure`
+are kept in the mod's own store, which Claude Code holds for it. Versions before 0.5.4
+wrote two one-line files, `~/.claude/pixbar/active` and `configured`; they are still read
+when the store holds nothing, and never written.
 
 **Runs** one program, every five seconds, in the session's working folder:
 

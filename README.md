@@ -92,8 +92,7 @@ Each creature is a skin file:
 | [`pixbar/skins/clawd.sh`](pixbar/skins/clawd.sh) | Clawd, with `HABITAT='land'` and a skateboard. |
 | `~/.claude/pixbar/skins/<name>.sh` | Your own. They show up in `/pixbar` next to the shipped ones. |
 
-Your current pick is stored in `~/.claude/pixbar/active`. Delete it to go back to the
-whale.
+Your pick is kept for the next session. `/pixbar theme whale` goes back to the whale.
 
 ### Make your own creature
 
@@ -119,8 +118,8 @@ A file that doesn't parse is ignored, and the whale is drawn instead.
 ### Privacy
 
 PixBar reads what Claude Code passes it and your local `git status` (every five
-seconds). It writes two one-line files, `~/.claude/pixbar/active` and
-`~/.claude/pixbar/configured`, and makes no network calls. The full list of what it
+seconds). It writes no file and makes no network calls; your theme is kept in the mod's own
+store. The full list of what it
 reads, writes and runs is in [pixbar/README.md](pixbar/README.md).
 
 ## Troubleshooting

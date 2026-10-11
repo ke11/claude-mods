@@ -126,9 +126,13 @@ export const register: Register = (on, options) => {
     root = $.plugin.root
     const read = (path: string) => $.fs.read(path)
 
-    // The creature last chosen, with /pixbar theme (kept in `active`) or with theme in
-    // /plugin configure, whichever was set later; the whale otherwise.
-    const firstLine = async (file: string) => {
+    // The creature last chosen, with /pixbar theme or with theme in /plugin configure,
+    // whichever was set later; the whale otherwise. Both picks are kept in the mod's own
+    // store. Before 0.5.4 they were one-line files in ~/.claude/pixbar, still read here
+    // where the store holds nothing, and no longer written.
+    const kept = async (key: string, file: string) => {
+      const value = await $.store.get(key).catch(() => undefined)
+      if (typeof value === 'string') return value
       for (const dir of userDirs()) {
         try {
           return (await $.fs.read(`${dir}/${file}`)).trim()
@@ -139,10 +143,10 @@ export const register: Register = (on, options) => {
       return undefined
     }
     const configured = typeof options.theme === 'string' ? options.theme : ''
-    const chosen = startTheme(configured, await firstLine('configured'), await firstLine('active'))
+    const chosen = startTheme(configured, await kept('configured', 'configured'), await kept('theme', 'active'))
     if (chosen.keep) {
-      await $.fs.write(`${home}/.claude/pixbar/configured`, `${configured}\n`).catch(() => undefined)
-      if (chosen.name === configured) await $.fs.write(`${home}/.claude/pixbar/active`, `${configured}\n`).catch(() => undefined)
+      await $.store.set('configured', configured).catch(() => undefined)
+      if (chosen.name === configured) await $.store.set('theme', configured).catch(() => undefined)
     }
     const found = chosen.name ? await loadSkin(read, chosen.name) : undefined
     if (found) useSkin(found)
@@ -173,7 +177,7 @@ export const register: Register = (on, options) => {
         const home2 = home && cwd.startsWith(home) ? '~' + cwd.slice(home.length) : cwd
         dir = home2
         model = await $.session.model()
-        const r = await $.process.run(['git', 'status', '--porcelain=v1', '-b'], { cwd, timeoutMs: 3000 })
+        const r = await $.process.run(['git', 'status', '--porcelain=v1', '-b'], { timeoutMs: 3000 }) // runs in the session's folder
         if (r.exitCode !== 0) {
           branch = ''
           scene.isDirty = false
@@ -326,8 +330,8 @@ export const register: Register = (on, options) => {
       const found = await loadSkin(path => $.fs.read(path), name)
       if (!found) return { text: `✗ No theme called ${name}. Themes: ${themes.join(', ')}.\n  Try /pixbar theme ${themes.find(t => t !== theme) ?? theme}` }
       useSkin(found)
-      // remembered where installed skins mark theirs, so the next session starts with it
-      await $.fs.write(`${home}/.claude/pixbar/active`, `${name}\n`).catch(() => undefined)
+      // kept in the mod's store, so the next session starts with it
+      await $.store.set('theme', name).catch(() => undefined)
       $.ui.invalidate('ui.render')
       return { text: `✓ Theme: ${nameOf(found)}. Kept for your next session.` }
     }
