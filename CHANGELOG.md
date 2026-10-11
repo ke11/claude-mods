@@ -4,6 +4,11 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
+### 0.5.4 (2026-10-12)
+
+- PixBar no longer writes any file. Your theme is kept in the mod's own store; `~/.claude/pixbar/active` from an earlier version is still read, so your creature stays.
+- `git status` runs in the session's folder with a command that is fixed text.
+
 ### 0.5.3 (2026-10-11)
 
 - The theme is a setting too: `/plugin configure pixbar@claude-mods` now shows whale or clawd above the layout. `/pixbar theme` still works, and whichever you set last is used.
