@@ -1,5 +1,6 @@
 {
   "name": "pixbar",
+  "displayName": "PixBar",
   "version": "0.5.3",
   "description": "A pixel creature above the prompt or in its own pane: the whale in a sea or clawd skating on land. Uncommitted work leaves plants and litter on the floor. Context colours it, the five-hour window sets its height or the time of day. /pixbar theme <name> picks one.",
   "author": {
@@ -7,6 +8,9 @@
   },
   "homepage": "https://pixbar.dev",
   "repository": "https://github.com/ke11/claude-mods",
+  "documentationUrl": "https://github.com/ke11/claude-mods#readme",
+  "supportUrl": "https://github.com/ke11/claude-mods/issues",
+  "privacyPolicyUrl": "https://github.com/ke11/claude-mods#privacy",
   "license": "MIT",
   "keywords": [
     "statusline",
