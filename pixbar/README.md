@@ -1,0 +1,48 @@
+# PixBar
+
+A pixel creature above your Claude Code prompt, or in a pane of its own: the whale in a
+sea, or clawd skating on land. It moves with the turn, fills with your context, rises
+with your five-hour usage window, and leaves litter on the floor until you commit.
+
+Install, commands, skins and troubleshooting: the [main README](../README.md) and
+[pixbar.dev](https://pixbar.dev).
+
+## What it reads, writes and runs
+
+PixBar makes no network calls and sends nothing anywhere.
+
+**Reads**
+
+- What Claude Code passes a mod: the working folder, the model name, context and
+  rate-limit usage, and when a turn or a tool call starts and ends. It does not read
+  your prompts, the replies or tool results.
+- The `HOME` environment variable, to find `~/.claude/pixbar`. No other variable, and no
+  credential.
+- Skin files: `skins/*.sh` shipped in this folder, and your own in
+  `~/.claude/pixbar/skins/`. They are read as text for their pixel rows and colours.
+  They are never run.
+
+**Writes**, both in `~/.claude/pixbar/`, each one line holding a theme name:
+
+- `active`: the theme you picked.
+- `configured`: the theme setting last seen in `/plugin configure`, so a change there is
+  noticed.
+
+Nothing else reads these two files.
+
+**Runs** one program, every five seconds, in the session's working folder:
+
+```
+git status --porcelain=v1 -b
+```
+
+Its output gives the branch name and whether there is uncommitted work. It stays in the
+mod.
+
+**Hooks**
+
+- `command.run` for its own `/pixbar` command only.
+- `tool.call`, to add a bubble when a tool starts. It never changes or blocks a call.
+- `ui.render`, to draw the band above the prompt, the pane and the spinner row.
+- `ui.close`, to move the creature back to the band when its pane is closed.
+- `session.start`, `session.measure`, `turn.start`, `turn.complete`, to follow the turn.
