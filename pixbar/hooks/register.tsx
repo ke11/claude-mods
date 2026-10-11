@@ -21,7 +21,7 @@ const GIT_EVERY = 5000
 const BREAKDOWN_EVERY = 15000
 const SAFE_NAME = /^[A-Za-z0-9._-]+$/
 const PANE = 'whale' // the pane's request id; its title is the creature's name
-const WHALE_NAMES = ['whale', 'whaleagent']
+const WHALE_NAMES = ['whale', 'whaleagent'] // whaleagent: its old name, still in older ~/.claude/pixbar/active files
 
 type Placement = 'band' | 'pane'
 
