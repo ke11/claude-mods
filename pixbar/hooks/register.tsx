@@ -28,6 +28,16 @@ type Placement = 'band' | 'pane'
 type Win = { kind: string; pct: number; resetsAt?: string }
 type Cat = { name: string; tokens: number; color: string; kind: string }
 
+// Which creature a session starts with. `configured` is theme in /plugin configure, `seen` is
+// the value it had when last looked at, `active` is what /pixbar theme kept. A configure value
+// that changed since it was seen is the later pick and wins; one never seen wins only where
+// nothing was picked with /pixbar, so an update never swaps a creature someone chose.
+export const startTheme = (configured: string, seen: string | undefined, active: string | undefined) => {
+  const changed = configured !== '' && configured !== seen
+  const takes = changed && (seen !== undefined || active === undefined)
+  return { name: takes ? configured : active, keep: changed }
+}
+
 export const register: Register = (on, options) => {
   // `placement` in /config picks the default; /pixbar band|pane switches for the session
   let placement: Placement = options.placement === 'pane' ? 'pane' : 'band'
@@ -116,15 +126,26 @@ export const register: Register = (on, options) => {
     root = $.plugin.root
     const read = (path: string) => $.fs.read(path)
 
-    // The creature last chosen with /pixbar, or installed as a skin; the whale otherwise.
-    for (const dir of userDirs()) {
-      try {
-        const found = await loadSkin(read, (await $.fs.read(`${dir}/active`)).trim())
-        if (found) { useSkin(found); break }
-      } catch {
-        // nothing chosen here: try the next folder, then keep the whale
+    // The creature last chosen, with /pixbar theme (kept in `active`) or with theme in
+    // /plugin configure, whichever was set later; the whale otherwise.
+    const firstLine = async (file: string) => {
+      for (const dir of userDirs()) {
+        try {
+          return (await $.fs.read(`${dir}/${file}`)).trim()
+        } catch {
+          // not in this folder: try the next
+        }
       }
+      return undefined
     }
+    const configured = typeof options.theme === 'string' ? options.theme : ''
+    const chosen = startTheme(configured, await firstLine('configured'), await firstLine('active'))
+    if (chosen.keep) {
+      await $.fs.write(`${home}/.claude/pixbar/configured`, `${configured}\n`).catch(() => undefined)
+      if (chosen.name === configured) await $.fs.write(`${home}/.claude/pixbar/active`, `${configured}\n`).catch(() => undefined)
+    }
+    const found = chosen.name ? await loadSkin(read, chosen.name) : undefined
+    if (found) useSkin(found)
     scene.level = levelFor(skin, fivePct)
 
     // the hint shows dim after /pixbar as it is typed: every theme that can be picked, then the layouts
@@ -293,7 +314,7 @@ export const register: Register = (on, options) => {
         const opened = await $.ui.open({ id: PANE, title: theme })
         $.ui.invalidate('ui.render')
         return { text: opened.isPlaced
-          ? '✓ Layout: pane, beside the transcript (this session). To keep it: placement in /config.'
+          ? '✓ Layout: pane, beside the transcript (this session). To keep it: /plugin configure pixbar@claude-mods.'
           : '✓ Layout: pane. It opens once the terminal is wide enough (144 columns).' }
       }
       await $.ui.close({ id: PANE }).catch(() => undefined)

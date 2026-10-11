@@ -4,6 +4,10 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
+### 0.5.3 (2026-10-11)
+
+- The theme is a setting too: `/plugin configure pixbar@claude-mods` now shows whale or clawd above the layout. `/pixbar theme` still works, and whichever you set last is used.
+
 ### 0.5.2 (2026-10-11)
 
 - A hint after `/pixbar` as you type it: every theme you can pick, then the layouts.
