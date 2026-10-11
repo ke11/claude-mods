@@ -1,7 +1,7 @@
 {
   "name": "pixbar",
   "displayName": "PixBar",
-  "version": "0.5.5",
+  "version": "0.5.6",
   "description": "A pixel creature above the prompt or in its own pane: the whale in a sea or clawd skating on land. Uncommitted work leaves plants and litter on the floor. Context colours it, the five-hour window sets its height or the time of day. /pixbar theme <name> picks one.",
   "author": {
     "name": "Kell Kwok"
@@ -32,7 +32,7 @@
       ],
       "default": "whale"
     },
-    "placement": {
+    "layout": {
       "type": "string",
       "title": "Where the creature lives",
       "description": "band: above the prompt. pane: a pane of its own, docked beside the transcript in fullscreen. /pixbar layout band or /pixbar layout pane switches for the session.",
