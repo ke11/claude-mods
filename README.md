@@ -74,8 +74,11 @@ and the whale rests on the seabed.
 
 `/pixbar clawd` and `/pixbar pane` work as shortcuts.
 
+**Settings.** `/plugin configure pixbar@claude-mods` sets both the theme and the layout.
+The theme there and `/pixbar theme` are the same choice: whichever you set last is used.
+
 **Keeping the pane.** `/pixbar layout` lasts for the session. To make it permanent, set
-`placement` to `pane` in `/config`. The pane docks beside the transcript in fullscreen;
+`placement` to `pane` there. The pane docks beside the transcript in fullscreen;
 opened at startup it needs a terminal at least 144 columns wide. Closing the pane sends
 the creature back to the band.
 

@@ -1,4 +1,5 @@
-import { expect, test } from 'claude-code/testing'
+import { describe, expect, test } from 'claude-code/testing'
+import { startTheme } from './register'
 
 const run = ($: any, args: string) => $.command.run({ plugin: 'pixbar', command: 'pixbar', args })
 
@@ -35,4 +36,19 @@ test('nonsense gets the menu back', async $ => {
   const out = await run($, 'shark')
   expect(out.text).toContain('Not a command')
   expect(out.text).toContain('/pixbar theme')
+})
+
+describe('theme in /plugin configure against /pixbar theme', () => {
+  test('a first install takes the configure pick', () => {
+    expect(startTheme('clawd', undefined, undefined)).toEqual({ name: 'clawd', keep: true })
+  })
+  test('an update keeps the creature picked with /pixbar', () => {
+    expect(startTheme('whale', undefined, 'clawd')).toEqual({ name: 'clawd', keep: true })
+  })
+  test('a changed configure pick wins over an older /pixbar pick', () => {
+    expect(startTheme('clawd', 'whale', 'whale')).toEqual({ name: 'clawd', keep: true })
+  })
+  test('an unchanged configure pick leaves a later /pixbar pick alone, a skin of your own included', () => {
+    expect(startTheme('whale', 'whale', 'shark')).toEqual({ name: 'shark', keep: false })
+  })
 })
