@@ -40,8 +40,9 @@ export const startTheme = (configured: string, seen: string | undefined, active:
 }
 
 export const register: Register = (on, options) => {
-  // `placement` in /config picks the default; /pixbar band|pane switches for the session
-  let placement: Placement = options.placement === 'pane' ? 'pane' : 'band'
+  // `layout` in /plugin configure picks the default; /pixbar layout band|pane switches for
+  // the session. Before 0.5.6 the setting was called `placement`.
+  let placement: Placement = (options.layout ?? options.placement) === 'pane' ? 'pane' : 'band'
   let skin: Skin = WHALE
   // the band's scene leads; the pane's copies its state and swims in its own width
   const scene: SceneState = { t: 0, mode: 'idle', ctxPct: 0, level: levelFor(WHALE, 0), isDirty: false, x: 20, dir: -1, bubbles: [] }

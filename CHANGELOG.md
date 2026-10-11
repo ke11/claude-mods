@@ -4,6 +4,10 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
+### 0.5.6 (2026-10-12)
+
+- The setting in `/plugin configure` is called `layout`, the same word as `/pixbar layout`. It was `placement`; if you had set it to `pane`, set it once more.
+
 ### 0.5.5 (2026-10-12)
 
 - The shipped creatures are part of the mod's code, so it reads no file of its own while it runs. The skin files moved to `skins/` at the top of the repository; your own skins in `~/.claude/pixbar/skins/` work as before.
