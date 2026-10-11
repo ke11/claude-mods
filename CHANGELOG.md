@@ -4,7 +4,7 @@ Releases of the mods in this marketplace. Versions follow each mod's `plugin.jso
 
 ## pixbar
 
-### Unreleased
+### 0.5.1 (2026-10-11)
 
 - `skins/whale.sh`: the whale as a skin file next to clawd, and the simplest example of the format. The built-in whale is still the fallback, and a check keeps the two identical.
 - The whale is named `whale`; `whaleagent`, its old name, still loads.
